@@ -21,8 +21,7 @@ $cmd_6 = IniRead("hotkeys.ini","commands", "cmd_6", "There is a problem with the
 $cmd_7 = IniRead("hotkeys.ini","commands", "cmd_7", "There is a problem with the .ini file")
 
 Global $isOnTop = False
-Global $HideShowFlag = False
-Global $titleOnTop, $isOnTop, $title, $isHidden
+Global $titleOnTop, $title, $isHidden
 Global $accuWeatherRadarLink = "http://sirocco.accuweather.com/nx_mosaic_400x300_public/sir/inmSIRVA_.gif"
 
 HotKeySet("^{F1}", "_Showcmd") ;Press CTRL + F1 to see the cmds you have on which keys
@@ -40,14 +39,9 @@ HotKeySet("^{F11}", "DesktopHideShow")
 HotKeySet("^{F12}", "WebSearch")
 HotKeySet("^`", "HideShowWin")
 HotKeySet("^{PGUP}", "HideShowWin")
-HotKeySet("^{F2}", "Restore")
-HotKeySet("^{F3}", "Maximize")
-HotKeySet("^{F4}", "Minimize")
 HotKeySet("^q", "EasySearch")
 HotKeySet("!1", "OpenCmdHere") ; ALT+1
 HotKeySet("!2", "ShowRadar") ; ALT+2
-
-
 
 Func _Exit()
 Exit
@@ -187,22 +181,6 @@ Func HideShowWin()
 		EndIf
 	EndIf
 	
-EndFunc
-
-; Need to delete these, same as Windows logo and arrow keys.
-Func Restore()
-	$win2Restore = WinGetTitle("[ACTIVE]")
-	WinSetState($win2Restore, "", @SW_RESTORE)
-EndFunc
-
-Func Maximize()
-	$win2Restore = WinGetTitle("[ACTIVE]")
-	WinSetState($win2Restore, "", @SW_MAXIMIZE)
-EndFunc
-
-Func Minimize()
-	$win2Restore = WinGetTitle("[ACTIVE]")
-	WinSetState($win2Restore, "", @SW_MINIMIZE)
 EndFunc
 
 Func EasySearch()

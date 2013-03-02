@@ -1,6 +1,5 @@
-office_hotkeys
+YA office_hotkeys
 ==============
-
 
 CTRL+1 through CTRL+7 are configurable hotkeys.  Change the values in the hotkeys.ini file to your liking.  No need to restart the executable, changes apply on the fly.
 
@@ -12,13 +11,7 @@ CTRL+0 sets the active window's transparency value to 255 (back to normal)
 
 CTRL+F12 activates the Google and Wikipedia search window
 
-CTRL+PageUp hides the active window
-CTRL+` (top left of keyboard) hides the active window (same as CTRL+PageUp)
-The tasktray icon changes to let you know when a window is hidden.
-
-CTRL+F2 restores a windows
-CTRL+F3 maximizes a windows
-CTRL+F4 minimizes a windows
+CTRL+PageUp hides the active window CTRL+` (top left of keyboard) hides the active window (same as CTRL+PageUp). The tasktray icon changes to let you know when a window is hidden.
 
 CTRL+q copies the selected text to the clipboard and searches Google for the text
 
