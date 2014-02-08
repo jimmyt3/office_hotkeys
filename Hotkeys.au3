@@ -35,6 +35,7 @@ HotKeySet("^7", "_cmd7")
 HotKeySet("^8", "_cmd8") 
 HotKeySet("^9", "_cmd9") 
 HotKeySet("^0", "_cmd0") 
+HotKeySet("^r", "EasyRun") 
 HotKeySet("^{F11}", "DesktopHideShow")
 HotKeySet("^{F12}", "WebSearch")
 HotKeySet("^`", "HideShowWin")
@@ -113,6 +114,22 @@ EndFunc
 Func _cmd0()
 		$activeTitle = WinGetTitle("[ACTIVE]")
 		WinSetTrans($activeTitle, "", 255) 	
+	EndFunc
+
+; Copy selected text and pass to cmd /c
+Func EasyRun()
+	Send("^c")
+	$ezCmd = ClipGet()
+	
+	if StringInStr($ezCmd, '\') Then
+		db("xxxxxxxxxxxxxxxxxx")
+		Run(@ComSpec & " /c " & '"explorer ' & $ezCmd & '"' , "", @SW_HIDE)
+		db(@ComSpec & " /c " & '"explorer ' & $ezCmd & '"' )
+	Else
+		Run(@ComSpec & " /c " & '"' & $ezCmd & '"' , "", @SW_HIDE)		
+		db(@ComSpec & " /c " & '"' & $ezCmd & '"' )
+	EndIf
+	Sleep(100)	; to avoid multiple key strokes
 EndFunc
 
 ; Shows web search and wikipedia search bar.
@@ -248,3 +265,7 @@ EndFunc
 While 1
 	sleep(100)
 WEnd
+
+Func db($msg)
+	ConsoleWrite("db: " & $msg & @CRLF)
+EndFunc
