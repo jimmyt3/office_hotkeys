@@ -15,6 +15,8 @@ CTRL+PageUp hides the active window CTRL+` (top left of keyboard) hides the acti
 
 CTRL+q copies the selected text to the clipboard and searches Google for the text
 
+CTRL+r copies higlighted text and runs it using "cmd /c"
+
 SHIFT+F1 exists the program
 
 CTRL+F1 shows a balloon listing the commands in the INI file
