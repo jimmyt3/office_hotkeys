@@ -1,4 +1,5 @@
 ; Created by Jim Thomas, Jr.
+; www.scatterbraintech.com
 ; This program enables user defined hotkeys
 ; Feel free to modify this code and use it however you want.
 
@@ -8,6 +9,7 @@
 #include <StaticConstants.au3>
 #include <WindowsConstants.au3>
 #include <IE.au3>
+#include <ScreenCapture.au3>
 
 
 HotKeySet("+{F1}", "_Exit") ;Press SHIFT + F1 to exit
@@ -32,7 +34,7 @@ HotKeySet("^4", "_cmd4")
 HotKeySet("^5", "_cmd5") 
 HotKeySet("^6", "_cmd6") 
 HotKeySet("^7", "_cmd7") 
-HotKeySet("^8", "_cmd8") 
+HotKeySet("^8", "_cmd8")
 HotKeySet("^9", "_cmd9") 
 HotKeySet("^0", "_cmd0") 
 HotKeySet("^r", "EasyRun") 
@@ -43,48 +45,59 @@ HotKeySet("^{PGUP}", "HideShowWin")
 HotKeySet("^q", "EasySearch")
 HotKeySet("!1", "OpenCmdHere") ; ALT+1
 HotKeySet("!2", "ShowRadar") ; ALT+2
+HotKeySet("^m", "EasyScreenCap")
+
+Func EasyScreenCap()
+    $activeTitle = WinGetTitle("[ACTIVE]")
+    $activeHWND= WinGetHandle ($activeTitle)
+	
+	$fileName = @MyDocumentsDir & "\_capture_" & @YEAR & @MON & @MDAY & "_" & @HOUR & @MIN & "_" & @SEC & ".jpg"
+	
+	_ScreenCapture_CaptureWnd($fileName, $activeHWND)
+	ShellExecute($fileName)
+EndFunc
 
 Func _Exit()
-Exit
+	Exit
 EndFunc 
 
 Func _Showcmd()
-TrayTip("cmds:", "CTRL + 1: " & $cmd_1 & @CRLF & "CTRL + 2: " & $cmd_2 & @CRLF & "CTRL + 3: " & $cmd_3 & @CRLF & "CTRL + 4: " & $cmd_4 & @CRLF & "CTRL + 5: " & $cmd_5 & @CRLF &"CTRL + 6: " & $cmd_6 & @CRLF &"CTRL + 7: " & $cmd_7 &@CRLF & "SHIFT + F1: Exit", 4)
+	TrayTip("cmds:", "CTRL + 1: " & $cmd_1 & @CRLF & "CTRL + 2: " & $cmd_2 & @CRLF & "CTRL + 3: " & $cmd_3 & @CRLF & "CTRL + 4: " & $cmd_4 & @CRLF & "CTRL + 5: " & $cmd_5 & @CRLF &"CTRL + 6: " & $cmd_6 & @CRLF &"CTRL + 7: " & $cmd_7 &@CRLF & "SHIFT + F1: Exit", 4)
 EndFunc
 
 Func _cmd1()
-$cmd_1 = IniRead("hotkeys.ini","commands", "cmd_1", "There is a problem with the .ini file")
-Run("cmd /c start " & $cmd_1, "", @SW_HIDE)
+	$cmd_1 = IniRead("hotkeys.ini","commands", "cmd_1", "There is a problem with the .ini file")
+	Run("cmd /c start " & $cmd_1, "", @SW_HIDE)
 EndFunc
 
 Func _cmd2()
-$cmd_2 = IniRead("hotkeys.ini","commands", "cmd_2", "There is a problem with the .ini file")
-Run("cmd /c start " & $cmd_2, "", @SW_HIDE)
+	$cmd_2 = IniRead("hotkeys.ini","commands", "cmd_2", "There is a problem with the .ini file")
+	Run("cmd /c start " & $cmd_2, "", @SW_HIDE)
 EndFunc 
 
 Func _cmd3()
-$cmd_3 = IniRead("hotkeys.ini","commands", "cmd_3", "There is a problem with the .ini file")
-Run("cmd /c start " & $cmd_3, "", @SW_HIDE)
+	$cmd_3 = IniRead("hotkeys.ini","commands", "cmd_3", "There is a problem with the .ini file")
+	Run("cmd /c start " & $cmd_3, "", @SW_HIDE)
 EndFunc
 
 Func _cmd4()
 	$cmd_4 = IniRead("hotkeys.ini","commands", "cmd_4", "There is a problem with the .ini file")
-Run("cmd /c start " & $cmd_4, "", @SW_HIDE)
+	Run("cmd /c start " & $cmd_4, "", @SW_HIDE)
 EndFunc
 
 Func _cmd5()
 	$cmd_5 = IniRead("hotkeys.ini","commands", "cmd_5", "There is a problem with the .ini file")
-Run("cmd /c start " & $cmd_5, "", @SW_HIDE)
+	Run("cmd /c start " & $cmd_5, "", @SW_HIDE)
 EndFunc 
 
 Func _cmd6()
 	$cmd_6 = IniRead("hotkeys.ini","commands", "cmd_6", "There is a problem with the .ini file")
-Run("cmd /c start " & $cmd_6, "", @SW_HIDE)
+	Run("cmd /c start " & $cmd_6, "", @SW_HIDE)
 EndFunc 
 
 Func _cmd7()
 	$cmd_7 = IniRead("hotkeys.ini","commands", "cmd_7", "There is a problem with the .ini file")
-Run("cmd /c start " & $cmd_7, "", @SW_HIDE)
+	Run("cmd /c start " & $cmd_7, "", @SW_HIDE)
 EndFunc
 
 ; This worked for WindowsXP, it's semi-broken on Vista and 7.
@@ -119,16 +132,7 @@ Func _cmd0()
 ; Copy selected text and pass to cmd /c
 Func EasyRun()
 	Send("^c")
-	$ezCmd = ClipGet()
-	
-	if StringInStr($ezCmd, '\') Then
-		db("xxxxxxxxxxxxxxxxxx")
-		Run(@ComSpec & " /c " & '"explorer ' & $ezCmd & '"' , "", @SW_HIDE)
-		db(@ComSpec & " /c " & '"explorer ' & $ezCmd & '"' )
-	Else
-		Run(@ComSpec & " /c " & '"' & $ezCmd & '"' , "", @SW_HIDE)		
-		db(@ComSpec & " /c " & '"' & $ezCmd & '"' )
-	EndIf
+	ShellExecute(ClipGet())
 	Sleep(100)	; to avoid multiple key strokes
 EndFunc
 
@@ -267,5 +271,5 @@ While 1
 WEnd
 
 Func db($msg)
-	ConsoleWrite("db: " & $msg & @CRLF)
+	ConsoleWrite($msg & @CRLF)
 EndFunc
