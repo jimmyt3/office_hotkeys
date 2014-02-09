@@ -26,3 +26,5 @@ ALT+1 "Open a Command Prompt Here", if explorer is not open it opens the desktop
 ALT+2 shows the latest accuweather.com radar for the Mid-atlantic
 
 CRTL+F11 hides/shows the desktop icons
+
+CTRL+m captures a screen grab of the current window, and saves it to My Documents
