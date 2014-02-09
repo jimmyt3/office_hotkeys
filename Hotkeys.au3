@@ -48,8 +48,8 @@ HotKeySet("!2", "ShowRadar") ; ALT+2
 HotKeySet("^m", "EasyScreenCap")
 
 Func EasyScreenCap()
-    $activeTitle = WinGetTitle("[ACTIVE]")
-    $activeHWND= WinGetHandle ($activeTitle)
+	$activeTitle = WinGetTitle("[ACTIVE]")
+	$activeHWND= WinGetHandle ($activeTitle)
 	
 	$fileName = @MyDocumentsDir & "\_capture_" & @YEAR & @MON & @MDAY & "_" & @HOUR & @MIN & "_" & @SEC & ".jpg"
 	
